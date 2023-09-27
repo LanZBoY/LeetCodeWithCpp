@@ -1,3 +1,6 @@
+# VSconfig
+*.vscode
+
 # Prerequisites
 *.d
 
