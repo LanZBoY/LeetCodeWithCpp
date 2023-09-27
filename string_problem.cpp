@@ -21,7 +21,7 @@ string smallestSubsequence(string s) {
 
 string decodeAtIndex(string s, int k) {
     queue<string> s_queue;
-    queue<int> r_queue;
+    queue<long> r_queue;
     for(int i = 0, first = -1; i < s.length(); i++){
         if(s[i] >= 'a' && s[i] <= 'z'){
             if(first == -1){
@@ -32,6 +32,8 @@ string decodeAtIndex(string s, int k) {
                 s_queue.push(string(s.substr(first, i - first)));
                 r_queue.push(s[i] - '0');
                 first = -1;
+            }else{
+                r_queue.front() = (s[i] - '0') * r_queue.front();
             }
         }
     }
@@ -52,6 +54,7 @@ string decodeAtIndex(string s, int k) {
 int main(){
     // smallestSubsequence("bcabc"); // abc
     // smallestSubsequence("cbacdcbc"); // acdb
+    cout << decodeAtIndex("a2345678999999999999999", 10) << endl;
     cout << decodeAtIndex("leet2code3", 10) << endl;
     return 0;
 }
