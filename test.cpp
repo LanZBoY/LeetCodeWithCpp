@@ -1,8 +1,8 @@
 #include<iostream>
-#include"utils.cpp"
+#include<string>
 
+using namespace std;
 
 int main(){
-    printHello();
-    cout<<"w"<<endl;
+    
 }

@@ -51,10 +51,35 @@ string decodeAtIndex(string s, int k) {
     return result.substr(k - 1, 1);
 }
 
+string addBinary(string a, string b){
+    string result = "";
+    int max_len = max(a.length(), b.length());
+    while (a.length() < max_len){
+        a = "0" + a;
+    }
+    while (b.length() < max_len){
+        b = "0" + b;
+    }
+    bool carry_flag = false;
+    for (int i = max_len - 1; i >= 0; i--){
+        int a_bin = a[i] - '0';
+        int b_bin = b[i] - '0';
+        bool current = a_bin ^ b_bin ^ carry_flag;
+        carry_flag = ((a_bin & b_bin) | (a_bin & carry_flag) | (b_bin & carry_flag));
+        if(current){
+            result = "1" + result;
+        }else{
+            result = "0" + result;
+        }
+    }
+    if(carry_flag){
+        result = "1" + result;
+    }
+    return result;
+}
+
 int main(){
-    // smallestSubsequence("bcabc"); // abc
-    // smallestSubsequence("cbacdcbc"); // acdb
-    cout << decodeAtIndex("a2345678999999999999999", 10) << endl;
-    cout << decodeAtIndex("leet2code3", 10) << endl;
+    cout << addBinary("11", "1") << endl;
+    cout << addBinary("1010", "1011") << endl;
     return 0;
 }
