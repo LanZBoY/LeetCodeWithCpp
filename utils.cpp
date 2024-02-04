@@ -1,6 +1,3 @@
 #include<iostream>
-using namespace std;
+#include<vector>
 
-void printHello(){
-    cout << "Hello World" << endl;
-}
