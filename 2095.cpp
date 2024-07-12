@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "utils.h"
+#include "utils.cpp"
 
-using namespace LeetCode;
+using namespace DataStructure;
 using namespace std;
 
 ListNode *deleteMiddle(ListNode *head)
