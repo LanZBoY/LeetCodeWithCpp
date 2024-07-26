@@ -1,5 +1,6 @@
 #include <vector>
 #include <queue>
+
 namespace DataStructure
 {
     // LinkList by WenTee
@@ -22,7 +23,7 @@ namespace DataStructure
         };
 
     private:
-        ListNode *head;
+        ListNode *head = nullptr;
     };
 
     // Binary Tree by WenTee
