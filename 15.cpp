@@ -7,32 +7,31 @@ using namespace std;
 
 vector<vector<int>> threeSum(vector<int> &nums)
 {
-    set<vector<int>> tempSet;
     sort(nums.begin(), nums.end());
+
+    set<vector<int>> resultSet;
     for (int targetIndex = 0; targetIndex < nums.size(); targetIndex++)
     {
-        int target = -nums[targetIndex];
+        int targetNum = -nums[targetIndex];
         int i = targetIndex + 1;
         int j = nums.size() - 1;
         while (i < j)
         {
-            if (i == targetIndex || target > nums[i] + nums[j])
-            {
-                i++;
-                continue;
-            }
-            if (j == targetIndex || target < nums[i] + nums[j])
+            if (nums[i] + nums[j] > targetNum)
             {
                 j--;
                 continue;
             }
-            tempSet.insert({nums[targetIndex], nums[i], nums[j]});
+            if (nums[i] + nums[j] + nums[targetIndex] == 0)
+            {
+                resultSet.insert({nums[targetIndex], nums[i], nums[j]});
+            }
             i++;
-            j--;
         }
     }
-    vector<vector<int>> result = vector(tempSet.begin(), tempSet.end());
-    return result;
+    vector<vector<int>> results(resultSet.begin(), resultSet.end());
+
+    return results;
 }
 
 int main()

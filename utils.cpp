@@ -2,6 +2,22 @@
 #include <iostream>
 namespace DataStructure
 {
+    std::string trim(std::string str)
+    {
+        int i = 0;
+        int j = str.size() - 1;
+        while (i < j && (str[i] == ' ' || str[j] == ' '))
+        {
+            if (str[i] == ' ')
+                i++;
+            if (str[j] == ' ')
+                j--;
+        }
+        return str.substr(i, j - i + 1);
+    }
+    LinkList::LinkList()
+    {
+    }
 
     LinkList::LinkList(std::vector<int> datas)
     {
@@ -10,12 +26,22 @@ namespace DataStructure
             return;
         }
         head = new ListNode(datas[0]);
-        ListNode *current = head;
+        tail = head;
         for (int i = 1; i < datas.size(); i++)
         {
-            current->next = new ListNode(datas[i]);
-            current = current->next;
+            tail->next = new ListNode(datas[i]);
+            tail = tail->next;
         }
+    }
+
+    void LinkList::addCycle(int position)
+    {
+        if (position < 0)
+            return;
+        ListNode *current = head;
+        while (current && position--)
+            current = current->next;
+        tail->next = current;
     }
 
     Tree::Tree(std::vector<int> datas)
@@ -42,6 +68,12 @@ namespace DataStructure
                 q.push(newNode);
             }
         }
+    }
+
+    Tree::Tree(std::string rawStr)
+    {
+        const std::string NULLFLAG = "null";
+        std::queue<TreeNode *> q;
     }
 
     Graph::Graph(std::vector<std::vector<int>> adjMatrix)

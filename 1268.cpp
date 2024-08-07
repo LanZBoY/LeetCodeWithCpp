@@ -3,31 +3,31 @@
 #include <unordered_map>
 using namespace std;
 
-struct Node
+struct GraphNode
 {
-    Node() : current(), isWord(false), nextMap(){};
-    Node(char c) : current(c), isWord(false), nextMap(){};
+    GraphNode() : current(), isWord(false), nextMap() {};
+    GraphNode(char c) : current(c), isWord(false), nextMap() {};
     char current;
     bool isWord;
-    unordered_map<char, Node *> nextMap;
+    unordered_map<char, GraphNode *> nextMap;
 };
 class Trie
 {
 public:
-    Node *root;
+    GraphNode *root;
     Trie()
     {
-        root = new Node();
+        root = new GraphNode();
     }
 
     void insert(string word)
     {
-        Node *current = root;
+        GraphNode *current = root;
         for (char c : word)
         {
             if (current->nextMap.find(c) == current->nextMap.end())
             {
-                current->nextMap[c] = new Node(c);
+                current->nextMap[c] = new GraphNode(c);
             }
             current = current->nextMap[c];
         }
@@ -35,7 +35,7 @@ public:
     }
 };
 
-void searchString(Node *current, string startWith, vector<string> &results)
+void searchString(GraphNode *current, string startWith, vector<string> &results)
 {
     if (results.size() == 3 || current == nullptr)
     {
@@ -53,7 +53,7 @@ void searchString(Node *current, string startWith, vector<string> &results)
     {
         if (current->nextMap.find(c) == current->nextMap.end())
             continue;
-        Node *next = current->nextMap[c];
+        GraphNode *next = current->nextMap[c];
         startWith.push_back(next->current);
         searchString(next, startWith, results);
         startWith.pop_back();
@@ -70,7 +70,7 @@ vector<vector<string>> suggestedProducts(vector<string> &products, string search
         t.insert(product);
     }
     vector<vector<string>> resultsList;
-    Node *current = t.root;
+    GraphNode *current = t.root;
     string startWith = "";
     for (char c : searchWord)
     {

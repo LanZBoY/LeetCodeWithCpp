@@ -16,14 +16,18 @@ namespace DataStructure
     class LinkList
     {
     public:
+        LinkList();
         LinkList(std::vector<int>);
         ListNode *getHead()
         {
             return head;
         };
 
+        void addCycle(int position);
+
     private:
         ListNode *head = nullptr;
+        ListNode *tail = nullptr;
     };
 
     // Binary Tree by WenTee
@@ -41,6 +45,7 @@ namespace DataStructure
     {
     public:
         Tree(std::vector<int> data);
+        Tree(std::string rawStr);
         TreeNode *getRoot()
         {
             return root;
