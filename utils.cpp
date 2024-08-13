@@ -4,16 +4,9 @@ namespace DataStructure
 {
     std::string trim(std::string str)
     {
-        int i = 0;
-        int j = str.size() - 1;
-        while (i < j && (str[i] == ' ' || str[j] == ' '))
-        {
-            if (str[i] == ' ')
-                i++;
-            if (str[j] == ' ')
-                j--;
-        }
-        return str.substr(i, j - i + 1);
+        str.erase(0, str.find_first_not_of(" "));
+        str.erase(str.find_last_not_of(" ") + 1);
+        return str;
     }
     LinkList::LinkList()
     {
@@ -43,7 +36,14 @@ namespace DataStructure
             current = current->next;
         tail->next = current;
     }
-
+    Tree::Tree()
+    {
+    }
+    Tree::Tree(TreeNode *root)
+    {
+        this->root = root;
+    }
+    // 完全展開樹使用
     Tree::Tree(std::vector<int> datas)
     {
         std::queue<TreeNode *> q;
@@ -63,17 +63,60 @@ namespace DataStructure
                 current->right = newNode;
                 q.pop();
             }
-            if (data != 0)
-            {
-                q.push(newNode);
-            }
         }
     }
-
+    // 非完全展開樹時使用
     Tree::Tree(std::string rawStr)
     {
         const std::string NULLFLAG = "null";
         std::queue<TreeNode *> q;
+        int i = 0;
+        int j = 0;
+        bool addLeft = true;
+        for (char &c : rawStr)
+        {
+            if (c == ']' || c == ',')
+            {
+                std::string tmp = trim(rawStr.substr(i + 1, j - i - 1));
+                if (tmp.empty())
+                {
+                    j++;
+                    continue;
+                }
+                TreeNode *current = nullptr;
+                if (NULLFLAG != tmp)
+                {
+                    int data = stoi(tmp);
+                    current = new TreeNode(data);
+                }
+                if (current != nullptr)
+                {
+                    q.push(current);
+                }
+                if (root != nullptr)
+                {
+                    if (addLeft)
+                    {
+                        q.front()->left = current;
+                    }
+                    else
+                    {
+                        q.front()->right = current;
+                        q.pop();
+                    }
+                    addLeft = !addLeft;
+                }
+                else
+                {
+                    root = current;
+                }
+            }
+            if (c == '[' || c == ',')
+            {
+                i = j;
+            }
+            j++;
+        }
     }
 
     Graph::Graph(std::vector<std::vector<int>> adjMatrix)

@@ -21,7 +21,7 @@ TreeNode *invertTree(TreeNode *root)
 
 int main()
 {
-    Tree tree = Tree({4, 2, 7, 1, 3, 6, 9});
+    Tree tree = Tree("[4,2,7,1,3,6,9]");
     TreeNode *res;
 
     res = invertTree(tree.getRoot());

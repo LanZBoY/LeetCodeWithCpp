@@ -44,8 +44,10 @@ namespace DataStructure
     class Tree
     {
     public:
-        Tree(std::vector<int> data);
-        Tree(std::string rawStr);
+        Tree();
+        Tree(TreeNode *);
+        Tree(std::vector<int>);
+        Tree(std::string);
         TreeNode *getRoot()
         {
             return root;
