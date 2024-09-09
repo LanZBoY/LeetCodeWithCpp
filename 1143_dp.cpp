@@ -8,31 +8,18 @@ using namespace std;
 // 1 + max(LCS("abc", "ac"), LCS("abcd", "a"));
 int longestCommonSubsequence(string text1, string text2)
 {
-    vector<vector<int>> dp;
-    int m = text1.size();
-    int n = text2.size();
-    for (int i = 0; i < m; i++)
+    vector<vector<int>> dp(text1.size() + 1, vector(text2.size() + 1, 0));
+    for (int i = 1; i < dp.size(); ++i)
     {
-        dp.push_back(vector(n, 0));
-    }
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < n; j++)
+        for (int j = 1; j < dp[i].size(); ++j)
         {
-            int upNum = i == 0 ? 0 : dp[i - 1][j];
-            int leftNum = j == 0 ? 0 : dp[i][j - 1];
-            int leftupNum = i != 0 && j != 0 ? dp[i - 1][j - 1] : 0;
-            if (text1[i] == text2[j])
-            {
-                dp[i][j] = 1 + leftupNum;
-            }
+            if (text1[i - 1] == text2[j - 1])
+                dp[i][j] = dp[i - 1][j - 1] + 1;
             else
-            {
-                dp[i][j] = max(upNum, leftNum);
-            }
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
         }
     }
-    return dp[m - 1][n - 1];
+    return dp[text1.size()][text2.size()];
 }
 
 int main()

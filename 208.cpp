@@ -6,62 +6,54 @@ using namespace std;
 class Trie
 {
 public:
-    struct Node
-    {
-        Node() : current(), isWord(false), nextMap(){};
-        Node(char c) : current(c), isWord(false), nextMap(){};
-        char current;
-        bool isWord;
-        unordered_map<char, Node *> nextMap;
-    };
-
-    Node *root;
     Trie()
     {
-        root = new Node();
     }
 
     void insert(string word)
     {
-        Node *current = root;
-        for (char c : word)
+        Node *current = &root;
+        for (char &c : word)
         {
-            if (current->nextMap.find(c) == current->nextMap.end())
-            {
-                current->nextMap[c] = new Node(c);
-            }
-            current = current->nextMap[c];
+            if (current->links.find(c) == current->links.end())
+                current->links[c] = Node();
+            current = &current->links[c];
         }
         current->isWord = true;
     }
 
     bool search(string word)
     {
-        Node *current = root;
-        for (char c : word)
+        Node *current = &root;
+        for (char &c : word)
         {
-            if (current->nextMap.find(c) == current->nextMap.end())
-            {
+            if (current->links.find(c) == current->links.end())
                 return false;
-            }
-            current = current->nextMap[c];
+            current = &current->links[c];
         }
         return current->isWord;
     }
 
     bool startsWith(string prefix)
     {
-        Node *current = root;
-        for (char c : prefix)
+        Node *current = &root;
+        for (char &c : prefix)
         {
-            if (current->nextMap.find(c) == current->nextMap.end())
-            {
+            if (current->links.find(c) == current->links.end())
                 return false;
-            }
-            current = current->nextMap[c];
+            current = &current->links[c];
         }
         return true;
     }
+
+private:
+    struct Node
+    {
+        Node() : isWord(false) {};
+        unordered_map<char, Node> links;
+        bool isWord;
+    };
+    Node root;
 };
 
 int main()
