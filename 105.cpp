@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace std;
 using namespace DataStructure;

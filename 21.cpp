@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace std;
 using namespace DataStructure;
@@ -53,9 +53,10 @@ ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
 int main()
 {
     ListNode *res;
-    res = mergeTwoLists(LinkList({1, 2, 4}).getHead(), LinkList({1, 3, 4}).getHead());
-    res = mergeTwoLists(LinkList({}).getHead(), LinkList({}).getHead());
-    res = mergeTwoLists(LinkList({}).getHead(), LinkList({0}).getHead());
+    vector<int> inputList;
+    res = mergeTwoLists(LinkList(inputList = {1, 2, 4}).getHead(), LinkList(inputList = {1, 3, 4}).getHead());
+    res = mergeTwoLists(LinkList(inputList = {}).getHead(), LinkList(inputList = {}).getHead());
+    res = mergeTwoLists(LinkList(inputList = {}).getHead(), LinkList(inputList = {0}).getHead());
 
     return 0;
 }

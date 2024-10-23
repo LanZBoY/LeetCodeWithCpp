@@ -3,7 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <queue>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace std;
 using namespace DataStructure;

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace std;
 using namespace DataStructure;

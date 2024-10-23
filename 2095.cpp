@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace DataStructure;
 using namespace std;

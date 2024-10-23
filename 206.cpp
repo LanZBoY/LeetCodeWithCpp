@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "utils.cpp"
+#include "utils.h"
 
 using namespace std;
 using namespace DataStructure;
@@ -27,6 +27,6 @@ int main()
 
     reverseList(LinkList({1, 2}).getHead());
 
-    reverseList(LinkList({}).getHead());
+    reverseList(LinkList().getHead());
     return 0;
 }
